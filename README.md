@@ -11,7 +11,7 @@ It flags suspicious transactions based on multiple rules including large amounts
 - Clean, well-documented code for easy maintenance
 
 ## Demo
-![Fraud Detector Demo](demo.gif)
+![Fraud Detector Demo](./fraud_demo.gif)
 
 ## Tech Stack
 
@@ -55,5 +55,6 @@ It flags suspicious transactions based on multiple rules including large amounts
 
 ## License
 MIT License © Ashpreet Chahal
+
 
 
