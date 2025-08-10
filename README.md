@@ -28,17 +28,28 @@ It flags suspicious transactions based on multiple rules including large amounts
    uvicorn app.main:app --reload
 6. Access the API docs at http://127.0.0.1:8000/docs
 
-## API Endpoints
-GET / - Check if API is running
-POST /detect-fraud - Submit a transaction for fraud check
+### API Endpoints
+- **GET /** - Check if API is running  
+- **POST /detect-fraud** - Submit a transaction for fraud check
 
-Example Request:
+#### Example Request:
+```json
 {
   "user_id": "user123",
   "amount": 15000,
   "timestamp": "2025-08-10T10:00:00",
   "location": "RU"
 }
+```
+
+#### Example Response:
+```json
+{
+  "is_fraud": true,
+  "message": "Transaction is flagged as fraudulent."
+}
+```
 
 ## License
 MIT License © Ashpreet Chahal
+
