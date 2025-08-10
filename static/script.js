@@ -1,4 +1,4 @@
-const form = document.getElementById("fraud-form");
+const form = document.getElementById("fraudForm");
 const resultDiv = document.getElementById("result");
 
 form.addEventListener("submit", async (e) => {
@@ -12,7 +12,7 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    const response = await fetch("/detect-fraud", {
+    const response = await fetch("/detect-fraud", {  // <-- IMPORTANT: use "/detect-fraud"
       method: "POST",
       headers: {
         "Content-Type": "application/json",

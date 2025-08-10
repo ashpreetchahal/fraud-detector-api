@@ -6,9 +6,9 @@ def log_transaction(session: Session, transaction: dict, is_fraud: bool):
     fraud_log = FraudLog(
         user_id=transaction["user_id"],
         amount=transaction["amount"],
-        timestamp=datetime.fromisoformat(transaction["timestamp"]),  # parse string to datetime
+        timestamp=datetime.fromisoformat(transaction["timestamp"]),
         location=transaction["location"],
-        is_fraud=is_fraud
+        is_fraud=is_fraud,
     )
     session.add(fraud_log)
     session.commit()
