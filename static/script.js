@@ -1,43 +1,38 @@
-document.getElementById("fraudForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
+const form = document.getElementById("fraud-form");
+const resultDiv = document.getElementById("result");
 
-  const form = event.target;
-  const user_id = form.user_id.value.trim();
-  const amount = parseFloat(form.amount.value);
-  const timestamp = form.timestamp.value;
-  const location = form.location.value.trim().toUpperCase();
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  const resultDiv = document.getElementById("result");
-  resultDiv.textContent = "Checking...";
+  const data = {
+    user_id: form.user_id.value,
+    amount: parseFloat(form.amount.value),
+    timestamp: form.timestamp.value,
+    location: form.location.value.toUpperCase(),
+  };
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/detect-fraud", {
+    const response = await fetch("/detect-fraud", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ user_id, amount, timestamp, location })
+      body: JSON.stringify(data),
     });
 
     if (!response.ok) {
-      throw new Error(`Server responded with status ${response.status}`);
+      throw new Error("Network response was not ok");
     }
 
-    const data = await response.json();
-
-    if (data.is_fraud) {
-      resultDiv.textContent = "⚠️ Transaction flagged as FRAUDULENT.";
-      resultDiv.classList.remove("text-gray-800");
-      resultDiv.classList.add("text-red-600", "font-bold");
+    const result = await response.json();
+    resultDiv.textContent = result.message;
+    if (result.is_fraud) {
+      resultDiv.style.color = "red";
     } else {
-      resultDiv.textContent = "✅ Transaction is clean.";
-      resultDiv.classList.remove("text-red-600", "font-bold");
-      resultDiv.classList.add("text-green-600", "font-semibold");
+      resultDiv.style.color = "green";
     }
   } catch (error) {
     resultDiv.textContent = "Error checking transaction. Please try again.";
-    resultDiv.classList.remove("text-green-600", "text-red-600", "font-bold", "font-semibold");
-    resultDiv.classList.add("text-yellow-600");
-    console.error(error);
+    resultDiv.style.color = "red";
   }
 });
