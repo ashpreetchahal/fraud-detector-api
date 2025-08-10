@@ -10,6 +10,9 @@ It flags suspicious transactions based on multiple rules including large amounts
 - Simple, extensible rules engine  
 - Clean, well-documented code for easy maintenance
 
+## Demo
+![Fraud Detector Demo](demo.gif)
+
 ## Tech Stack
 
 - FastAPI  
@@ -52,4 +55,5 @@ It flags suspicious transactions based on multiple rules including large amounts
 
 ## License
 MIT License © Ashpreet Chahal
+
 
